@@ -5,6 +5,7 @@ import { CarService } from './car.service';
 import { CarSchema } from './schemas/car.schema';
 
 
+//this is the module for car
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: 'Car', schema: CarSchema }]),
