@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/
 import { CarService } from './car.service';
 import { CarDto } from './car.dto';
 
+//this is the controller for car
 @Controller('car')
 export class CarController {
     constructor(private carService:CarService) {}
