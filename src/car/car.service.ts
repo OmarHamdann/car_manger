@@ -4,13 +4,19 @@ import { Model } from 'mongoose';
 import { InjectModel } from '@nestjs/mongoose';
 import { CarDto } from './car.dto';
 
+//hide _id and __v from the response
+const carPro = {
+  __v: false,
+  _id: false,
+};
+
 @Injectable()
 export class CarService {
   constructor(@InjectModel('Car') private readonly carModel: Model<ICar>) {}
 
   //this method is used to get all cars
   public async getCars(): Promise<CarDto[]> {
-    const cars = await this.carModel.find().exec();
+    const cars = await this.carModel.find({},carPro).exec();
     if (!cars) {
       throw new HttpException('Cars not found', 404);
     }
@@ -19,7 +25,7 @@ export class CarService {
 
   //this method is used to get car by id
   public async getCarById(id: number): Promise<CarDto> {
-    const car = await this.carModel.findOne({ id }).exec();
+    const car = await this.carModel.findOne({ id },carPro).exec();
     if (!car) {
       throw new HttpException('Car nottt found', 404);
     }
